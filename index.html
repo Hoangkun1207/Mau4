@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f7fc">
+<title>Hoàng Kun iOS | App Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--bg:#f5f6fc;--card:#fff;--text:#17182b;--muted:#8992aa;--border:rgba(130,140,180,.13);--shadow:0 10px 28px rgba(50,60,110,.12);--purple:#6265ff;--pink:#c03ef3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Be Vietnam Pro",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .25s,color .25s}
+body.dark{--bg:#11121d;--card:#1c1e2c;--text:#f5f5ff;--muted:#a0a6bd;--border:rgba(255,255,255,.08);--shadow:0 10px 30px rgba(0,0,0,.3)}
+body:before{content:"";position:fixed;width:650px;height:650px;top:-320px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(111,126,255,.17),transparent 70%);pointer-events:none;z-index:-1}
+button,a{font:inherit}a{text-decoration:none;color:inherit}button{cursor:pointer}
+.navbar{height:52px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 24px;background:rgba(255,255,255,.76);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border)}
+.dark .navbar{background:rgba(20,21,34,.8)}
+.nav-btn{width:36px;height:36px;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;font-size:17px;transition:.2s}
+.nav-btn:hover{background:rgba(120,120,255,.12);transform:scale(1.08)}
+.bell{color:#6175ff}.theme{color:#ff9d00}
+.hero{text-align:center;padding:39px 15px 38px}
+.avatar-wrap{width:116px;height:116px;position:relative;margin:0 auto 12px}
+.avatar{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid white;box-shadow:0 6px 25px rgba(90,90,180,.22)}
+.avatar-wrap:before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(126,105,255,.35);pointer-events:none}
+.avatar-hat{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:36px;filter:drop-shadow(0 3px 3px #0003);pointer-events:none}
+.hello{font-size:12px;color:var(--muted);margin-top:10px}
+.hero h1{font-size:22px;font-weight:800;margin-top:5px}
+.verified{color:#2196f3;font-size:16px}
+.tagline{font-size:13px;color:var(--muted);margin-top:6px}.tagline span{color:#7964ff;font-weight:800}
+.socials{display:flex;justify-content:center;gap:12px;margin-top:18px}
+.social{width:51px;height:51px;border-radius:17px;display:grid;place-items:center;background:var(--card);box-shadow:var(--shadow);font-size:22px;transition:.25s}
+.social:hover{transform:translateY(-5px)}
+.discord{color:#5865f2}.telegram{color:#20a5e9}.youtube{color:#ff2424}
+.notice{max-width:1200px;margin:0 auto 22px;padding:13px 17px;border-radius:15px;background:var(--card);box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;font-size:12px}
+.notice i{color:#6865ff;font-size:17px}.notice strong{color:#7563ff}
+.container{width:100%;max-width:1660px;padding:0 14px;margin:auto}
+.apps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.app-card{min-width:0;background:var(--card);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .25s,box-shadow .25s;animation:fadeUp .55s both}
+.app-card:hover{transform:translateY(-5px);box-shadow:0 16px 35px rgba(85,85,170,.17)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.app-cover{width:100%;aspect-ratio:1.8/1;object-fit:cover;display:block;background:#e6e8f5}
+.app-content{padding:0 15px 1px}
+.app-heading{display:flex;align-items:center;gap:10px;margin-top:-27px;position:relative;min-height:58px}
+.app-icon{width:59px;height:59px;flex:0 0 59px;object-fit:cover;border-radius:16px;border:3px solid var(--card);background:var(--card);box-shadow:0 3px 12px #0002}
+.app-details{min-width:0;padding-top:23px}
+.app-name{font-size:12px;font-weight:800;line-height:1.5;overflow-wrap:anywhere}
+.app-date{font-size:10px;color:var(--muted);font-style:italic;margin-top:2px}
+.app-description{font-size:10px;color:var(--muted);margin-top:8px;min-height:17px;line-height:1.6}
+.download{width:100%;min-height:42px;border-radius:30px;margin:10px 0 13px;display:flex;justify-content:center;align-items:center;gap:9px;color:#fff;font-size:12px;font-weight:700;background:linear-gradient(100deg,#6265ff,#c03ef3);box-shadow:0 5px 14px rgba(130,80,255,.2);transition:.22s}
+.download:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 8px 22px rgba(130,80,255,.35)}
+.download:active{transform:scale(.98)}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 19px}
+.panel{background:var(--card);border-radius:21px;padding:16px;box-shadow:var(--shadow);border:1px solid var(--border);min-width:0}
+.music{display:flex;align-items:center;gap:12px}
+.music-cover{width:61px;height:61px;border-radius:50%;border:2px solid #ff823e;object-fit:cover;flex-shrink:0}
+.music-content{flex:1;min-width:0}
+.music-title{font-size:12px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.music-artist{font-size:10px;color:var(--muted);margin-top:4px}
+.music-controls{display:flex;align-items:center;gap:7px}
+.music-controls button{width:31px;height:31px;flex-shrink:0;border-radius:50%;border:1px solid #dce0ff;background:#f0f1ff;color:#7864ff;font-size:11px}
+.dark .music-controls button{background:#292b42;border-color:#414365}
+.progress-area{display:flex;align-items:center;gap:9px;margin-top:9px;color:var(--muted);font-size:9px}
+.progress{flex:1;min-width:0;height:4px;accent-color:#8061ff;cursor:pointer}
+.youtube-panel{display:flex;align-items:center;gap:12px}
+.youtube-avatar{width:62px;height:62px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.youtube-info{flex:1;min-width:0}.youtube-info h3{font-size:14px}.youtube-info p{font-size:10px;color:var(--muted);margin-top:4px}
+.subscribe{background:#111;color:white;border-radius:30px;padding:11px 21px;font-size:11px;font-weight:700;white-space:nowrap;transition:.2s}
+.subscribe:hover{background:#333;transform:scale(1.04)}
+footer{text-align:center;border-top:1px solid var(--border);padding:18px 10px;color:var(--muted);font-size:11px}
+footer span{color:#8065ff;font-weight:700}
+.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,100px);opacity:0;background:#202131;color:#fff;padding:12px 22px;border-radius:30px;font-size:12px;z-index:200;transition:.3s;box-shadow:var(--shadow);max-width:90%;text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+@media(max-width:950px){.apps{grid-template-columns:repeat(2,minmax(0,1fr))}.notice{margin-left:14px;margin-right:14px}}
+@media(max-width:600px){.navbar{height:49px;padding:0 13px}.hero{padding:32px 12px 35px}.avatar-wrap{width:100px;height:100px}.hero h1{font-size:20px}.social{width:47px;height:47px}.notice{margin:0 10px 17px;font-size:11px}.container{padding:0 10px}.apps{grid-template-columns:1fr;gap:15px}.app-cover{aspect-ratio:1.7/1}.bottom{grid-template-columns:1fr;gap:12px;margin-top:17px}.panel{padding:13px}.youtube-avatar{width:55px;height:55px}.subscribe{padding:10px 15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="navbar">
+ <button class="nav-btn bell" onclick="showToast('Chào mừng đến với Hoàng Kun iOS!')" aria-label="Thông báo"><i class="fa-solid fa-bell"></i></button>
+ <button class="nav-btn theme" id="themeBtn" onclick="toggleTheme()" aria-label="Đổi giao diện"><i class="fa-solid fa-sun"></i></button>
+</header>
+
+<section class="hero">
+ <div class="avatar-wrap">
+  <img class="avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=faces" alt="Avatar Hoàng Kun">
+  <span class="avatar-hat" aria-hidden="true">🧢</span>
+ </div>
+ <p class="hello">Hi, i am</p>
+ <h1>Hoàng Kun <i class="fa-solid fa-circle-check verified"></i></h1>
+ <p class="tagline">and I'm a <span>Developer.</span></p>
+ <div class="socials">
+  <a class="social discord" href="#" onclick="showToast('Bạn chưa thêm link Discord!');return false" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+  <a class="social telegram" href="#" onclick="showToast('Bạn chưa thêm link Telegram!');return false" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+  <a class="social youtube" href="https://youtube.com/kunmusic06" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+ </div>
+</section>
+
+<div class="notice"><i class="fa-solid fa-bullhorn"></i><div><strong>THÔNG BÁO:</strong> Chào mừng bạn đến với hệ thống Hoàng Kun iOS!</div></div>
+
+<main class="container">
+ <section class="apps" id="appList"></section>
+ <section class="bottom">
+  <div class="panel">
+   <div class="music">
+    <img class="music-cover" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" alt="Ảnh bìa nhạc">
+    <div class="music-content">
+     <div class="music-title" id="musicTitle">HOÀNG KUN MUSIC</div>
+     <div class="music-artist" id="musicArtist">Playlist yêu thích</div>
+    </div>
+    <div class="music-controls">
+     <button onclick="changeTrack(-1)" title="Bài trước"><i class="fa-solid fa-backward-step"></i></button>
+     <button onclick="toggleMusic()" id="playBtn" title="Phát nhạc"><i class="fa-solid fa-play"></i></button>
+     <button onclick="changeTrack(1)" title="Bài tiếp"><i class="fa-solid fa-forward-step"></i></button>
+    </div>
+   </div>
+   <div class="progress-area">
+    <span id="currentTime">0:00</span>
+    <input class="progress" id="progress" type="range" min="0" max="100" value="0">
+    <span id="duration">0:00</span>
+   </div>
+   <audio id="audio" preload="metadata"></audio>
+  </div>
+  <div class="panel youtube-panel">
+   <img class="youtube-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces" alt="Hoàng Kun">
+   <div class="youtube-info"><h3>Hoàng Kun iOS</h3><p>@kunmusic06</p><p>YouTube Channel</p></div>
+   <a class="subscribe" href="https://youtube.com/kunmusic06" target="_blank" rel="noopener noreferrer">Đăng ký</a>
+  </div>
+ </section>
+</main>
+<footer>© Designer by <span>HOÀNG KUN iOS</span> 2026</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============================
+   DANH SÁCH ỨNG DỤNG
+   Thay cover, icon và link tại đây.
+   Ảnh đang dùng ảnh mẫu online.
+============================ */
+const apps=[
+ {name:"MENU AOV MAP ADR V1",date:"30/10/2026",description:"Phiên bản AOV MAP dành cho Android",cover:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&h=560&fit=crop",icon:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=200&h=200&fit=crop",link:""},
+ {name:"MENU AOV MAP ADR V2",date:"31/10/2026",description:"Phiên bản cập nhật mới nhất",cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",icon:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&h=200&fit=crop",link:""},
+ {name:"FREE FIRE CHEAT PROXY",date:"17/10/2026",description:"Ứng dụng hỗ trợ Free Fire",cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop&sat=-20",icon:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",link:""},
+ {name:"8 BALL POOL",date:"26/10/2026",description:"Ứng dụng 8 Ball Pool",cover:"https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1000&h=560&fit=crop",icon:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=200&h=200&fit=crop",link:""},
+ {name:"TIKTOK MOD",date:"27/10/2026",description:"Phiên bản TikTok tùy chỉnh",cover:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1000&h=560&fit=crop",icon:"https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200&h=200&fit=crop",link:""}
+];
+
+function renderApps(){
+ const list=document.getElementById("appList");
+ list.innerHTML=apps.map((app,index)=>`
+  <article class="app-card" style="animation-delay:${index*.07}s">
+   <img class="app-cover" src="${app.cover}" alt="${escapeHTML(app.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/900x500/e9eaf5/6265ff?text=Hoang+Kun+iOS'">
+   <div class="app-content">
+    <div class="app-heading">
+     <img class="app-icon" src="${app.icon}" alt="" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e9eaf5/6265ff?text=HK'">
+     <div class="app-details">
+      <div class="app-name">${escapeHTML(app.name)}</div>
+      <div class="app-date">Cập Nhật Ngày ${escapeHTML(app.date)}</div>
+     </div>
+    </div>
+    <p class="app-description">${escapeHTML(app.description)}</p>
+    <a class="download" href="${app.link || '#'}" ${app.link?'target="_blank" rel="noopener noreferrer"':''} onclick="return downloadApp(event,${index})">
+     <i class="fa-solid fa-download"></i> Download
+    </a>
+   </div>
+  </article>`).join("");
+}
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+}
+function downloadApp(event,index){
+ if(!apps[index].link){event.preventDefault();showToast("Ứng dụng chưa có link tải!");return false}
+ return true;
+}
+function toggleTheme(){
+ document.body.classList.toggle("dark");
+ const dark=document.body.classList.contains("dark");
+ document.getElementById("themeBtn").innerHTML=dark?'<i class="fa-solid fa-moon"></i>':'<i class="fa-solid fa-sun"></i>';
+ document.querySelector('meta[name="theme-color"]').content=dark?"#11121d":"#f6f7fc";
+}
+let toastTimer;
+function showToast(message){
+ const toast=document.getElementById("toast");
+ toast.textContent=message;toast.classList.add("show");
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>toast.classList.remove("show"),2500);
+}
+
+/* MUSIC PLAYER
+   Đặt file nhạc tên music.mp3 cùng thư mục index.html.
+   Có thể thêm nhiều bài vào mảng tracks.
+*/
+const tracks=[{title:"HOÀNG KUN MUSIC",artist:"Playlist yêu thích",src:"music.mp3"}];
+let trackIndex=0;
+const audio=document.getElementById("audio");
+const playBtn=document.getElementById("playBtn");
+const progress=document.getElementById("progress");
+function loadTrack(){
+ const track=tracks[trackIndex];
+ audio.src=track.src;
+ document.getElementById("musicTitle").textContent=track.title;
+ document.getElementById("musicArtist").textContent=track.artist;
+ progress.value=0;
+ document.getElementById("currentTime").textContent="0:00";
+ document.getElementById("duration").textContent="0:00";
+}
+function toggleMusic(){
+ if(audio.paused){
+  audio.play().then(()=>playBtn.innerHTML='<i class="fa-solid fa-pause"></i>').catch(()=>showToast("Chưa có file music.mp3 hoặc không thể phát nhạc!"));
+ }else{
+  audio.pause();playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
+ }
+}
+function changeTrack(direction){
+ if(tracks.length===1){
+  audio.currentTime=0;
+  if(audio.paused)toggleMusic();
+  return;
+ }
+ trackIndex=(trackIndex+direction+tracks.length)%tracks.length;
+ loadTrack();toggleMusic();
+}
+function formatTime(seconds){
+ if(!Number.isFinite(seconds))return "0:00";
+ return Math.floor(seconds/60)+":"+String(Math.floor(seconds%60)).padStart(2,"0");
+}
+audio.addEventListener("loadedmetadata",()=>document.getElementById("duration").textContent=formatTime(audio.duration));
+audio.addEventListener("timeupdate",()=>{
+ if(!audio.duration)return;
+ progress.value=audio.currentTime/audio.duration*100;
+ document.getElementById("currentTime").textContent=formatTime(audio.currentTime);
+});
+progress.addEventListener("input",()=>{if(audio.duration)audio.currentTime=progress.value/100*audio.duration});
+audio.addEventListener("ended",()=>playBtn.innerHTML='<i class="fa-solid fa-play"></i>');
+renderApps();loadTrack();
+</script>
+</body>
+</html>
